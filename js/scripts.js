@@ -24,18 +24,15 @@ function setGameElements() {
             figure.style.display = 'none';
             pickElement.style.display = 'block';
             resultElement.style.display = 'block';
-            winAlert.style.display = 'none';
         break;
         case 'ended':
             btnNewGame.innerText = 'Play again';
-            winAlert.style.display = 'block';
         case 'notStarted':
         default:
             newGameElement.style.display = 'block';
             figure.style.display = 'block';
             pickElement.style.display = 'none';
             resultElement.style.display = 'none';
-            winAlert.style.display = 'none';
     }
 }
 
@@ -51,6 +48,10 @@ function newGame(){
     player.name = prompt('Please enter Your name', 'imię gracza');
     if(player.name) {
         player.score = computer.score = 0;
+        playerPickElement.innerHTML = '';
+        computerPickElement.innerHTML = '';
+        playerResultElement.innerHTML = 'Choose the weapon';
+        computerResultElement.innerHTML = '';
         gameState = 'started';
         setGameElements();
 
