@@ -1,0 +1,1 @@
+# Gra papier nożyce kamień
