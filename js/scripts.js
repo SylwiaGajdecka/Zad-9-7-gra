@@ -14,7 +14,8 @@ var gameState = 'notStarted',
 var newGameElement = document.getElementById('js-newGameElement'),
     pickElement = document.getElementById('js-playerPickElement'),
     resultElement = document.getElementById('js-resultTableElement'),
-    figure = document.getElementById('js-figure');
+    figure = document.getElementById('js-figure'),
+    winAlert = document.getElementById('js-winAlert');
 
 function setGameElements() {
     switch(gameState) {
@@ -23,15 +24,18 @@ function setGameElements() {
             figure.style.display = 'none';
             pickElement.style.display = 'block';
             resultElement.style.display = 'block';
+            winAlert.style.display = 'none';
         break;
         case 'ended':
             btnNewGame.innerText = 'Play again';
+            winAlert.style.display = 'block';
         case 'notStarted':
         default:
             newGameElement.style.display = 'block';
             figure.style.display = 'block';
             pickElement.style.display = 'none';
             resultElement.style.display = 'none';
+            winAlert.style.display = 'none';
     }
 }
 
@@ -83,11 +87,11 @@ function playerPick(playerPick){
     playerPickElement.innerHTML = playerPick;
     computerPickElement.innerHTML = computerPick;
 
-    checkTheWinner(playerPick, computerPick);
+    checkTheWinner(playerPick, computerPick); //dlaczego ta funkcja musi być wywołana tutaj?
 }
 
 function checkTheWinner(playerPick, computerPick){ //dlaczego tutaj przekazuje się parametry a do innych funkcji nie?
-    playerResultElement.innerHTML = computerResultElement.innerHTML = '';  //dlaczego ta funkcja nie wyświetla wyników?
+    playerResultElement.innerHTML = computerResultElement.innerHTML = '';
 
     var winnerIs = 'player';
 
@@ -95,7 +99,7 @@ function checkTheWinner(playerPick, computerPick){ //dlaczego tutaj przekazuje s
 
         winnerIs = 'none';
         computerResultElement.innerHTML = "draw";
-        playerResultElement.innerHTML = "draw"
+        playerResultElement.innerHTML = "draw";
 
     } else if ( (computerPick == 'scissors' && playerPick == 'paper') ||
                 (computerPick == 'paper' && playerPick == 'rock') ||
@@ -114,9 +118,25 @@ function checkTheWinner(playerPick, computerPick){ //dlaczego tutaj przekazuje s
         player.score++;
     }
 
+    setGamePoints();
+    endTheGame(); //dlaczego tą funkcję musimy wywołać tutaj???? aktualna punktacja jest przychowywana tylko tu?
 }
 
-function setGamePoints(){
+    function setGamePoints(){
     playerScore.innerHTML = player.score;
     computerScore.innerHTML = computer.score;
+}
+
+function endTheGame(){
+    if (player.score == 10 ){
+        alert('You are the WINNER! You have saved the World from the DARK SIDE of POWER!');
+        gameState = 'ended';
+        setGameElements();
+    }
+
+    if (computer.score == 10){
+        alert('You\'ve lost... The DARK SIDE of POWER has taken over the whole World');
+        gameState = 'ended';
+        setGameElements();
+    }
 }
