@@ -1,0 +1,16 @@
+{
+  "name": "zad-9-7-gra",
+  "version": "1.0.0",
+  "description": "Kamień Nożyce Papier",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sylwia Gajdecka",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^2.0.0"
+  }
+}
